@@ -26,7 +26,7 @@
 
 SHELL=bash
 PREFIX ?= /usr/local
-_PROJECT_NPM=evm-chains-info
+_PROJECT_NPM=libevm
 _PROJECT=$(_PROJECT_NPM).js
 _NAMESPACE=themartiancompany
 DOC_DIR=$(DESTDIR)$(PREFIX)/share/doc/$(_PROJECT)
@@ -56,11 +56,9 @@ NPM_FILES=\
   "README.md" \
   "COPYING" \
   "AUTHORS.rst" \
-  "evm-chains-info" \
+  "libevm" \
   "eslint.config.mjs" \
   "fs-worker.webpack.config.cjs" \
-  "libevm-chains-info" \
-  "libevm-chains-info.webpack.config.cjs" \
   "package.json" \
   "webpack.config.cjs"
 
