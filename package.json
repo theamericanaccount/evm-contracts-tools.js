@@ -88,7 +88,10 @@
   "type":
     "commonjs",
   "main":
-    "libevm",
+    "libevm-wallet",
+  "bin":
+    { "evm-wallet.js":
+        "evm-wallet" },
   "scripts": {
     "build-fs-worker":
       "npx webpack --mode 'production' --config 'fs-worker.webpack.config.cjs' --stats-error-details",

@@ -56,7 +56,10 @@ NPM_FILES=\
   "README.md" \
   "COPYING" \
   "AUTHORS.rst" \
-  "libevm" \
+  "lib" \
+  "libevm-wallet" \
+  "libevm-wallet.webpack.config.cjs" \
+  "evm-wallet" \
   "eslint.config.mjs" \
   "fs-worker.webpack.config.cjs" \
   "package.json" \
