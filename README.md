@@ -22,120 +22,65 @@
 [comment]: <> (If not, see <https://www.gnu.org/licenses/>.)
 [comment]: <> (SPDX-License-Identifier: AGPL-3.0)
 
-# EVM Library (`libevm.js`)
+# EVM Wallet (`evm-wallet.js`)
 
-Library providing useful functions
-to write native applications interacting with EVM-compatible
-blockchain networks.
+Cryptocurrency wallet for Ethereum Virtual Machine (EVM) compatible
+blockchain networks written in Javascript based on the
+[Ethers](
+  https://github.com/ethers-io/ethers.js) library and part of the
+EVM Toolchain.
 
 It depends on
-[Crash Javascript](
-  https://github.com/themartiancompany/crash-js),
 [EVM Chains Info](
-  https://github.com/themartiancompany/evm-chains-info),
-[EVM Chains Explorers](
-  https://github.com/themartiancompany/evm-chains-explorers),
-the
-[EVM Contracts Tools](
-  https://github.com/themartiancompany/evm-contract-tools)
-and it is supposed to be used with
-[EVM Wallet](
-  https://github.com/themartiancompany/evm-wallet)
+  https://github.com/themartiancompany/evm-chains-info)
 and
-[Solidity Compiler](
-  https://github.com/themartiancompany/solidity-compiler).
+[EVM Chains Explorers](
+  https://github.com/themartiancompany/evm-chains-explorers)
+in order to automatically retrieve informations about
+blockchain networks, on
+[key-gen](
+  https://github.com/themartiancompany/key-gen),
+for which it is at the same time a seed-phrase provider,
+to generate secrets,
+and on the
+[Crash Bash](
+  https://github.com/themartiancompany/crash-bash)
+and
+[Crash JavaScript](
+  https://github.com/themartiancompany/crash-js)
+run-time libraries.
 
-The build reference tool for applications using the library
-is
-[EVM Make](
-  https://github.com/themartiancompany/evm-make).
-For this Javascript implementation is `npm`.
-
-Together with the aforementioned applications
-as well as others, libEVM makes up the EVM Toolchain.
-
-EVM stands for *Ethereum Virtual Machine*.
-
-Significant applications developed using the library are
+It is a dependency for the
+[EVM Contracts Tools](
+  https://github.com/themartiancompany/evm-contracts-tools),
+[libEVM](
+  https://github.com/themartiancompany/libevm),
+and so all the programs depending on it, such as the
+[EVM OpenPGP KeyServer](
+  https://github.com/themartiancompany/evm-openpgp-keyserver),
 the
 [Ethereum Virtual Machine File System](
   https://github.com/themartiancompany/evmfs)
-(EVMFS), the
+and the uncensorable
 [Ur](
   https://github.com/themartiancompany/ur)
-uncensorable Life and DogeOS user repository
-and application store and its reference
-[pub](
-  https://github.com/themartiancompany/pub)
-publishing tool and source retrieval tool
-[aspe](
-  https://github.com/themartiancompany/aspe),
-the
-[EVM OpenPGP Key Server](
-  https://github.com/themartiancompany/evm-openpgp-keyserver),
-the uncensorable, undeletable, distributed, network-neutral,
-decentralized Twitter (whose sources are entirely hosted on
-the EVMFS) and many others currently in development.
-
-LibEVM is a core component of the Human Instrumentality Project (HIP).
-
-## Documentation
-
-You can immediately start using this library into your Bash program by
-pasting the following at its beginning:
-
-```bash
-_bin="$(
-  dirname \
-    "$( \
-      command \
-        -v \
-	  "env")")"
-_lib="${_bin}/../lib"
-source \
-  "${_lib}/libevm/libevm"
-```
-
-For a Javascript program or library you can use a similarly styled
-import:
-
-```javascript
-const
-  _libevm_module =
-    require(
-      "libevm");
-```
-
-While one could say documentation work is never really
-complete for a program or library in active development,
-a short manual can be consulted upon installation typing
-
-```bash
-man \
-  libevm
-```
-
-It's currently suggested to look at existing programs
-depending on the library to speed up the library usage
-understanding.
+Life and DogeOS user repository and application store. 
 
 ## Installation
 
-The library in this source repo
+The wallet in this source repo
 can be installed from source using GNU Make.
 
 ```bash
-make
 make \
   install
-```
 
-LibEVM has officially published on the
+The program has officially published on the
 the uncensorable
 [Ur](
   https://github.com/themartiancompany/ur)
 user repository and application store as
-`libevm`.
+`evm-wallet`.
 The source code is published on the
 [Ethereum Virtual Machine File System](
   https://github.com/themartiancompany/evmfs)
@@ -145,14 +90,16 @@ To install it from there just type
 
 ```bash
 ur \
-  libevm
+  evm-wallet
 ```
 
 A censorable HTTP Github mirror of the recipe published there,
 containing a full list of the software dependencies needed to run the
 tools is hosted on
-[libevm-ur](
-  https://github.com/themartiancompany/libevm-ur).
+[evm-wallet-ur](
+  https://github.com/themartiancompany/evm-wallet-ur).
+
+
 
 A censorable binary build for the GNU and Android bases of
 Life and DogeOS, also compatible with the Arch Linux distribution
@@ -178,8 +125,10 @@ and so it can be installed from there by typing
 ```bash
 npm \
   install \
-    "libevm"
+    "evm-wallet.js"
 ```
+Be aware the mirrors could go offline any time as Github or NPM and more
+in general all HTTP resources are inherently unstable and censorable.
 
 ## License
 

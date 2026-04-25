@@ -21,9 +21,9 @@
    License along with this program.
    If not, see <https://www.gnu.org/licenses/>.
 
-=========================
-EVM Chains Info Authors
-=========================
+============================
+EVM Wallet Authors
+============================
 
 * Pellegrino Prevete
   * eth-mail

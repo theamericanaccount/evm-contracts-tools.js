@@ -1,10 +1,8 @@
-{
-  "name":
-    "libevm",
+{ "name": "evm-wallet.js",
   "version":
-    "0.0.2",
+    "0.0.1",
   "description":
-    "Library providing useful functions to write native applications interacting with EVM-compatible blockchain networks.",
+    "Cryptocurrency wallet for Ethereum Virtual Machine (EVM) compatible blockchain networks written in Javascript, part of the EVM Toolchain, depending on the Ethers library.",
   "funding": {
     "type":
       "patreon",
@@ -12,14 +10,14 @@
       "https://patreon.com/tallero"
   },
   "man": [
-    "./man/libevm.js.1"
+    "./man/evm-wallet.js.1"
   ],
   "files": [
     "AUTHORS.rst",
     "COPYING",
     "README.md",
-    "libevm",
-    "libevm.js",
+    "evm-wallet",
+    "evm-wallet.js",
     "fs-worker.js",
     "fs-worker.webpack.config.js",
     "index.html",
