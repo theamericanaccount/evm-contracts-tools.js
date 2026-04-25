@@ -26,8 +26,8 @@
 
 SHELL=bash
 PREFIX ?= /usr/local
-_PROJECT_NPM=evm-wallet
-_PROJECT=$(_PROJECT_NPM).js
+_PROJECT=evm-wallet
+_PROJECT_NPM=$(_PROJECT).js
 _NAMESPACE=themartiancompany
 DOC_DIR=$(DESTDIR)$(PREFIX)/share/doc/$(_PROJECT)
 USR_DIR=$(DESTDIR)$(PREFIX)
@@ -57,9 +57,9 @@ NPM_FILES=\
   "COPYING" \
   "AUTHORS.rst" \
   "lib" \
-  "libevm-wallet" \
-  "libevm-wallet.webpack.config.cjs" \
-  "evm-wallet" \
+  "lib$(_PROJECT)" \
+  "lib$(_PROJECT).webpack.config.cjs" \
+  "$(_PROJECT)" \
   "eslint.config.mjs" \
   "fs-worker.webpack.config.cjs" \
   "package.json" \
@@ -89,11 +89,11 @@ install-scripts:
 	    "$${_file}" \
 	    "$(LIB_DIR)/node/$${_file}"; \
 	done
-	ln \
-	  -s \
-	  "$(PREFIX)/lib/$(_PROJECT_NPM)/node/lib$(_PROJECT_NPM)" \
-	  "$(LIB_DIR)/$(_PROJECT_NPM)-js" || \
-	true
+	# ln \
+	#   -s \
+	#   "$(PREFIX)/lib/$(_PROJECT_NPM)/node/lib$(_PROJECT_NPM)" \
+	#   "$(LIB_DIR)/$(_PROJECT_NPM)-js" || \
+	# true
 
 build-man:
 
@@ -112,16 +112,17 @@ build-man:
 	cp \
 	  "man/$(_PROJECT).1.rst" \
 	  "build/man"
-	# cat \
-	#   "man/$(_PROJECT_NPM).1.rst" | \
-	#   sed \
-	#     "s/$(_PROJECT_NPM)/$(_PROJECT)/g" > \
-	#     "build/man/$(_PROJECT).1.rst"
+	cat \
+	  "man/$(_PROJECT_NPM).1.rst" | \
+	  sed \
+	    "s/$(_PROJECT_NPM)/$(_PROJECT)/g" > \
+	    "build/man/$(_PROJECT_NPM).1.rst"
 	rst2man \
-	  "build/man/$(_PROJECT).1.rst" \
-	  "build/man/$(_PROJECT).1"
+	  "build/man/$(_PROJECT_NPM).1.rst" \
+	  "build/man/$(_PROJECT_NPM).1"
 	rm \
-	  "build/man/$(_PROJECT).1.rst"
+	  "build/man/$(_PROJECT).1.rst" \
+	  "build/man/$(_PROJECT_NPM).1.rst"
 	rm \
 	  "build/man/variables.rst"
 
@@ -196,7 +197,7 @@ install-man:
 	$(_INSTALL_DIR) \
 	  "$(MAN_DIR)/man1"
 	$(_INSTALL_FILE) \
-	  "build/man/$(_PROJECT).1" \
-	  "$(MAN_DIR)/man1/$(_PROJECT).1"
+	  "build/man/$(_PROJECT_NPM).1" \
+	  "$(MAN_DIR)/man1/$(_PROJECT_NPM).1"
 
 .PHONY: check build-man build-npm install install-doc install-man install-npm install-scripts shellcheck
