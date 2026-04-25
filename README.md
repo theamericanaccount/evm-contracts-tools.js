@@ -74,6 +74,7 @@ can be installed from source using GNU Make.
 ```bash
 make \
   install
+```
 
 The program has officially published on the
 the uncensorable
@@ -102,24 +103,30 @@ tools is hosted on
 
 
 A censorable binary build for the GNU and Android bases of
-Life and DogeOS, also compatible with the Arch Linux distribution
-and the Termux pacman-based environment can be found on the
+Life and
+[DogeOS](
+  https://github.com/themartiancompany/dogeos),
+also compatible with the Arch Linux distribution,
+the Termux pacman-based environment and Windows
+can be found on the
 [Fur](
   https://github.com/themartiancompany/fur)
 and it can be installed by typing
 
 ```bash
 fur \
-  libevm
+  evm-wallet
 ```
 
 Direct links to the binary package can be directly accessed
 through
 [Github](
-https://github.com/themartiancompany/fur/tree/libevm)
+https://github.com/themartiancompany/fur/tree/evm-wallet)
+in many ways.
+Check the Fur documentation for more information.
 
 The package has also been published
-on the NPM Registry as `evm-chains-info`
+on the NPM Registry as `evm-wallet.js`
 and so it can be installed from there by typing
 
 ```bash
