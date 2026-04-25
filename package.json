@@ -34,7 +34,7 @@
     "ethereum"
   ],
   "homepage":
-    "https://github.com/themartiancompany/evm-wallet.js",
+    "https://github.com/themartiancompany/evm-wallet",
   "bugs": {
     "url":
       "https://github.com/themartiancompany/evm-wallet.js/issues"
