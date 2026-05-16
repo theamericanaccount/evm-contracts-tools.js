@@ -28,57 +28,89 @@ const
   _libcrash =
     require(
       '../libcrash-js/crash-js');
-_cmdline_check =
-  _libcrash._cmdline_check;
-_error_display =
-  _libcrash._error_display;
-_msg_info =
-  _libcrash._msg_info;
-_msg_error =
-  _libcrash._msg_error;
-_printf =
-  _libcrash._printf;
+const
+  _cmdline_check =
+    _libcrash._cmdline_check;
+const
+  _error_display =
+    _libcrash._error_display;
+const
+  _msg_info =
+    _libcrash._msg_info;
+const
+  _msg_error =
+    _libcrash._msg_error;
+const
+  _printf =
+    _libcrash._printf;
 const
   { ethers } =
     require(
       "ethers");
-_ethers =
-  ethers;
-_wei_to_ether =
-  _ethers.formatEther;
 const
-  _transaction_get_module =
-    require(
-      '../evm-transactions-tools/transaction-get');
-_transaction_get =
-  _transaction_get_module._transaction_get;
+  _ethers =
+    ethers;
 const
-  _transaction_receipt_get_module =
+  _wei_to_ether =
+    _ethers.formatEther;
+const
+  _evm_transactions_tools_module =
     require(
-      '../evm-transactions-tools/transaction-receipt-get');
-_transaction_receipt_get =
-  _transaction_receipt_get_module._transaction_receipt_get;
+      "evm-transactions-tools");
+const
+  _transaction_get =
+    _evm_transactions_tools_module._transaction_get;
+const
+  _transaction_receipt_get =
+    _evm_transactions_tools_module._transaction_receipt_get;
 
 function
   _global_variables() {
   app_name =
     "deployer-get";
+  /* global
+       wallet_seed:
+         writable */
   wallet_seed =
     "";
+  /* global
+       retries_max:
+         writable */
   retries_max =
     "";
+  /* global
+       api_key_path:
+         writable */
   api_key_path =
     "";
+  /* global
+       chain_id:
+         writable */
   chain_id =
     "";
+  /* global
+       chain_name:
+         writable */
   chain_name =
     "";
+  /* global
+       target_network:
+         writable */
   target_network =
     "";
+  /* global
+       contract_address:
+         writable */
   contract_address =
     "";
+  /* global
+       transaction_deployment:
+         writable */
   transaction_deployment =
     "";
+  /* global
+       quiet:
+         writable */
   quiet =
     "";
 }
