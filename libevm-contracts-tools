@@ -33,21 +33,6 @@ const
   _libcrash_module =
     require(
       "crash-js");
-/* global
-     _file_exists */
-const
-  _file_exists =
-    _libcrash_module._file_exists;
-/* global
-     _json_read */
-const
-  _json_read =
-    _libcrash_module._json_read;
-/* global
-     _path_join */
-const
-  _path_join =
-    _libcrash_module._path_join;
 const
   _bytecode_creation_get_module =
     require(
@@ -57,6 +42,16 @@ const
 const
   _bytecode_creation_get =
     _bytecode_creation_get_module._bytecode_creation_get;
+const
+  _bytecode_runtime_get_module =
+    require(
+      "./lib/bytecode_runtime_get");
+/* global
+     _bytecode_runtime_get */
+const
+  _bytecode_runtime_get =
+    _bytecode_runtime_get_module._bytecode_runtime_get;
+
 const
   _contract_get_module =
     require(
@@ -110,6 +105,10 @@ module.exports = {
     _bytecode_runtime_get,
   _contract_get:
     _contract_get,
+  _deployer_get:
+    _deployer_get,
+  _deployer_verify:
+    _deployer_verify,
   _evm_contract_call_dynamic:
     _evm_contract_call_dynamic,
   _evm_contract_call_static:
