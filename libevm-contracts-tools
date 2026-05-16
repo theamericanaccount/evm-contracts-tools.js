@@ -33,16 +33,27 @@ const
   _libcrash_module =
     require(
       "crash-js");
-_file_exists =
-  _libcrash_module._file_exists;
-_json_read =
-  _libcrash_module._json_read;
-_path_join =
-  _libcrash_module._path_join;
+/* global
+     _file_exists */
+const
+  _file_exists =
+    _libcrash_module._file_exists;
+/* global
+     _json_read */
+const
+  _json_read =
+    _libcrash_module._json_read;
+/* global
+     _path_join */
+const
+  _path_join =
+    _libcrash_module._path_join;
 const
   _bytecode_creation_get_module =
     require(
       "./lib/bytecode_creation_get");
+/* global
+     _bytecode_creation_get */
 const
   _bytecode_creation_get =
     _bytecode_creation_get_module._bytecode_creation_get;
@@ -50,6 +61,8 @@ const
   _contract_get_module =
     require(
       "./lib/contract_get");
+/* global
+     _contract_get */
 const
   _contract_get =
     _contract_get_module._contract_get;
@@ -57,6 +70,8 @@ const
   _deployer_get_module =
     require(
       "./lib/deployer_get");
+/* global
+     _deployer_get */
 const
   _deployer_get =
     _deployer_get_module._deployer_get;
@@ -64,6 +79,8 @@ const
   _deployer_verify_module =
     require(
       "./lib/deployer_verify");
+/* global
+     _deployer_verify */
 const
   _deployer_verify =
     _deployer_verify_module._deployer_verify;
@@ -71,6 +88,8 @@ const
   _evm_contract_call_dynamic_module =
     require(
       "./lib/evm-contract-call-dynamic");
+/* global
+     _evm_contract_call_dynamic */
 const
   _evm_contract_call_dynamic =
     _evm_contract_call_dynamic_module._evm_contract_call_dynamic;
@@ -78,6 +97,8 @@ const
   _evm_contract_call_static_module =
     require(
       "./lib/evm-contract-call-static");
+/* global
+     _evm_contract_call_static */
 const
   _evm_contract_call_static =
     _evm_contract_call_static_module._evm_contract_call_static;
@@ -203,6 +224,7 @@ function _rpc_backends_get(
     _db_path) {
     let
       _chain_id,
+      _rpc_backend,
       _rpc_backend_get_opts,
       _rpcs;
   if ( _selection_method == undefined ) {
