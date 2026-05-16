@@ -128,54 +128,54 @@ function
   call_date =
     "";
   /* global
-       target_command:
+       call_type:
          writable */
-  target_command =
+  call_type =
     "";
   /* global
-       input_type:
+       index_retrieve:
          writable */
-  input_type =
+  index_retrieve =
     "";
   /* global
-       output_type:
+       contract_address:
          writable */
-  output_type =
+  contract_address =
     "";
   /* global
-       retrieval_mode:
+       contract_bytecode:
          writable */
-  retrieval_mode =
+  contract_bytecode =
     "";
   /* global
-       user_level:
+       contract_compiler_output:
          writable */
-  user_level =
+  contract_compiler_output =
     "";
   /* global
-       db_paths:
+       contract_abi:
          writable */
-  db_paths =
+  contract_abi =
+    "";
+  /* global
+       contract_method:
+         writable */
+  contract_method =
+    "";
+  /* global
+       method_args:
+         writable */
+  method_args =
     [];
   /* global
-       selection_method:
+       price_gas:
          writable */
-  selection_method =
+  price_gas =
     "";
   /* global
-       api_key:
+       measure_unit:
          writable */
-  api_key =
-    "";
-  /* global
-       target_chain:
-         writable */
-  target_chain =
-    "";
-  /* global
-       networks_all:
-         writable */
-  networks_all =
+  measure_unit =
     "";
   /* global
        quiet:
@@ -522,13 +522,13 @@ function
 }
 
 function
-  _evm_chains_info_cmdline(
+  _evm_contract_call_cmdline(
     _app_opts) {
   let
     _result;
   const
     _results =
-      _evm_chains_info.apply(
+      _evm_contract_call.apply(
         null,
         app_opts);
   for ( _result of _results ) {
@@ -560,5 +560,5 @@ app_opts = [
   target_chain,
   db_paths
 ];
-_evm_chains_info_cmdline(
+_evm_contract_call_cmdline(
   app_opts);

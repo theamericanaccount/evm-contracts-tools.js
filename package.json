@@ -96,6 +96,8 @@
     "libevm-contracts-tools",
   "bin":
     { 
+      "evm-contract-call":
+        "evm-contract-call",
       "evm-contract-call.js":
         "evm-contract-call",
       "evm-contract-call-dynamic.js":
