@@ -167,9 +167,11 @@ async function
   if ( _contract_deployer == _deployer_real ) {
     _is_deployer =
       true;
+  }
   else if ( _contract_deployer != _deployer_real ) {
     _is_deployer =
       false;
+  }
   return _is_deployer;
 }
 
