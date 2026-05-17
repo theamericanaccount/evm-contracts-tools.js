@@ -45,6 +45,12 @@
 /* global
      api_key:
        writable */
+/* global
+     wallet_path:
+       writable */
+/* global
+     wallet_seed:
+       writable */
 
 const
   _libcrash =
@@ -323,7 +329,7 @@ function
       `             Call timeout:   ${call_timeout}`,
       `                  API key:   ${api_key}`,
       `     RPC selection method:   ${rpc_selection}`,
-      `                Gas price:   ${gas_price}`,
+      `                Gas price:   ${price_gas}`,
       `       Contract options:`,
       `         Contract address:   ${contract_address}`,
       `             Contract ABI:   ${contract_abi}`,
@@ -348,28 +354,37 @@ function
     _line;
   const
     _text = [
-      "Returns info about EVM blockchains.",
+      "Runs a smart contract function.",
       "",
       "Usage:",
       "",
-      "  evm-chains-info.js",
+      "  evm-contract-call.js",
       "    [options]",
-      "    <target-chain>",
+      "    <contract-address>",
+      "    <contract-method>",
+      "    ([method-args])",
+      "",
+      "  networks:",
+      "    all those supported by",
+      "    'evm-chains-info' as well",
+      "    as directly RPC addresses",
       "",
       "  options:",
       "",
-      "     -C --command                    Target command. Can be 'get' or 'set'.",
-      `       <target-command>              Default: '${target_command}`,
+      "     -t --call-type                  It can be 'static' or 'dynamic'.",
+      `       <call-type>                   Default: '${call_type}`,
       "",
-      "     -i --input-type                 Input type. It can be 'id' or 'name'.",
-      `       <input-type>                  Default: '${input_type}'`,
+      `     -V --msg-value                  How much '${measure_unit} to attach to the`,
+      `       <msg-value>                   transaction.`,
+      `                                     Default: '${msg_value}'`,
       "",
-      "     -o --output-type                Output type. It can be 'id', 'name',",
-      "       <output-type>                 'rpc', 'explorers'.",
-      `                                     Default: '${output_type}'`,
+      "     -v --price-gas                  I dont remember. It can be 'idontknow'.",
+      "       <price-gas>",
+      `                                     Default: '${price_gas}'`,
       "",
-      "     -m --retrieval-mode             It can be 'offline'.",
-      `       <retrieval-mode>              Default: '${retrieval_mode}'`,
+      "     -u --measure-unit               Measure unit for the transacion.",
+      `       <measure-unit>                It can be 'ether' or 'wei'.`,
+      `                                     Default: '${measure_unit}'`,
       "",
       "     -u --user-level                 It can be 'y' or 'n'.",
       `       <user-level>                  Default: '${user_level}'`,
