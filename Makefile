@@ -121,6 +121,15 @@ build-man:
 	cp \
 	  "man/variables.rst" \
 	  "build/man"
+	_version="$$( \
+	  npm \
+	    view \
+	      "$${PWD}" \
+	      "version")"; \
+	sed \
+	  "s/insert.version.here/$${_version}/" \
+	  -i \
+	  "build/man/variables.rst"; \
 	for _file in $(MAN_FILES); do \
 	  cp \
 	    "man/$${_file}.1.rst" \
