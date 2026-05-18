@@ -43,7 +43,8 @@
 /* global
      contract_compiler_output */
 /* global
-     target_network */
+     target_network:
+       writable */
 /* global
      target_networks:
        writable */
