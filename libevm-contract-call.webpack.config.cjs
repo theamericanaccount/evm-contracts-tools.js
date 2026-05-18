@@ -100,6 +100,14 @@ module.exports = {
         _path.resolve(
           __dirname,
           'node_modules/fs/fs'),
+      "libevm-contracts-tools":
+        _path.resolve(
+          __dirname,
+          './libevm-contract-tools'),
+      "libevm":
+        _path.resolve(
+          __dirname,
+          'node_modules/libevm/libevm'),
       "path":
         _path.resolve(
           __dirname,
