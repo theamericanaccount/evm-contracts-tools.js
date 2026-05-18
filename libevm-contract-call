@@ -33,20 +33,32 @@
 /* eslint-disable
      no-useless-assignment */
 
+/* libEVM global variables */
 /* global 
-     db_paths */
+     api_key */
 /* global
-     input_type:
-       writable */
+     target_network */
 /* global
-     user_level */
+     contract_address */
 /* global
-     target_chain */
+     target_networks */
 
 const
   _libcrash_module =
     require(
       "crash-js");
+/* global
+     _dirname */
+/* eslint-disable-next-line
+     no-global-assign */
+_dirname =
+  _libcrash_module._dirname;
+/* global
+     _file_exists */
+/* eslint-disable-next-line
+     no-global-assign */
+_file_exists =
+  _libcrash_module._file_exists;
 /* global
      _homedir_get */
 /* eslint-disable-next-line
@@ -122,6 +134,11 @@ function
     target_network =
       "1";
   }
+}
+
+function
+  _default_artifact_path_get() {
+  true;
 }
 
 function
