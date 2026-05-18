@@ -89,8 +89,7 @@ const
      _provider_get */
 const
   _provider_get =
-    _network_provider_module._provider_get;
-
+    _evm_wallet_module._provider_get;
 
 function
   _global_variables() {
