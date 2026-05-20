@@ -93,6 +93,8 @@
       "18.0.0"
   },
   "overrides": {
+    "evm-contracts-tools":
+      "^0.0.24",
     "evm-wallet.js":
       "^0.0.40"
   },
