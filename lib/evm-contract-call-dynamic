@@ -249,6 +249,91 @@ function
 }
 
 async function
+  _price_gas_auto_detect(
+    _target_network,
+    _api_key_path,
+    _measure_unit,
+    _price_gas) {
+  let
+    _gas_fee,
+    _fee_priority,
+    _msg,
+    _price_feasible_retries_max,
+    _price_gas_transaction_get_args,
+    _price_gas_transaction_get_selection_mode,
+    _price_gas_transaction_get_retries_max;
+  _msg =
+    `Auto-detecting gas price.`;
+  _msg_info(
+    _msg);
+  const
+    _retries_max =
+      3;
+  _price_feasible_retries_max =
+    _retries_max;
+  _price_gas_transaction_get_selection_mode =
+    _price_gas;
+  _price_gas_transaction_get_retries_max =
+    _retries_max;
+  _price_gas_transaction_get_args = [
+    _target_network,
+    _price_gas_transaction_get_selection_mode,
+    _api_key_path,
+    _measure_unit,
+    "",      // wallet seed
+    "",      // target address,
+    "price", // output type
+    "",      // output file
+    _price_gas_transaction_get_retries_max
+  ];
+  _price_gas = await
+    _price_gas_transaction_get.apply(
+      null,
+      _price_gas_transaction_get_args);
+  _price_gas_transaction_get_args = [
+    _target_network,
+    _price_gas_transaction_get_selection_mode,
+    _api_key_path,
+    _measure_unit,
+    "",    // wallet seed
+    "",    // target address,
+    "fee", // output type
+    "",    // output file
+    _price_gas_transaction_get_retries_max
+  ];
+  _gas_fee = await
+    _price_gas_transaction_get.apply(
+      null,
+      _price_gas_transaction_get_args);
+  _price_gas_transaction_get_args = [
+    _target_network,
+    _price_gas_transaction_get_selection_mode,
+    _api_key_path,
+    _measure_unit,
+    "",         // wallet seed
+    "",         // target address,
+    "priority", // output type
+    "",         // output file
+    _price_gas_transaction_get_retries_max
+  ];
+  _fee_priority = await
+    _price_gas_transaction_get.apply(
+      null,
+      _price_gas_transaction_get_args);
+  _msg =
+    `Got gas price '${_price_gas}' ` +
+    `${_measure_unit} with '${_gas_fee}' ` +
+    `'${_measure_unit}' with priority fee ` +
+    `'${_fee_priority}' '${_measure_unit}' from rpc ` +
+    `'${_target_network}' using ` +
+    `selection mode ` +
+    `'${_price_gas_transaction_get_selection_mode}'.`;
+  _msg_info(
+    _msg);
+  return _price_gas;
+}
+
+async function
   _contract_call_dynamic(
     _call_timeout,
     _wallet_seed,
@@ -263,7 +348,8 @@ async function
     _contract_bytecode_path,
     _contract_compiler_output_path,
     _contract_method,
-    _method_args) {
+    _method_args,
+    _verbose) {
   let
     _amount,
     _contract,
@@ -304,73 +390,12 @@ async function
   if ( _price_gas == "auto" ||
        _price_gas == "fast" ||
        _price_gas == "nextblock" ) {
-    _msg =
-      `Auto-detecting gas price.`;
-    _msg_info(
-      _msg);
-    _price_gas_transaction_get_selection_mode =
-      _price_gas;
-    _retries_max =
-      3;
-    _price_feasible_retries_max =
-      _retries_max;
-    _price_gas_transaction_get_retries_max =
-      _retries_max;
-    _price_gas_transaction_get_args = [
-      _target_network,
-      _price_gas_transaction_get_selection_mode,
-      _api_key_path,
-      _measure_unit,
-      "",      // wallet seed
-      "",      // target address,
-      "price", // output type
-      "",      // output file
-      _price_gas_transaction_get_retries_max
-    ];
-    _price_gas = await
-      _price_gas_transaction_get.apply(
-        null,
-        _price_gas_transaction_get_args);
-    _price_gas_transaction_get_args = [
-      _target_network,
-      _price_gas_transaction_get_selection_mode,
-      _api_key_path,
-      _measure_unit,
-      "",    // wallet seed
-      "",    // target address,
-      "fee", // output type
-      "",    // output file
-      _price_gas_transaction_get_retries_max
-    ];
-    _gas_fee = await
-      _price_gas_transaction_get.apply(
-        null,
-        _price_gas_transaction_get_args);
-    _price_gas_transaction_get_args = [
-      _target_network,
-      _price_gas_transaction_get_selection_mode,
-      _api_key_path,
-      _measure_unit,
-      "",         // wallet seed
-      "",         // target address,
-      "priority", // output type
-      "",         // output file
-      _price_gas_transaction_get_retries_max
-    ];
-    _fee_priority = await
-      _price_gas_transaction_get.apply(
-        null,
-        _price_gas_transaction_get_args);
-    _msg =
-      `Got gas price '${_price_gas}' ` +
-      `${_measure_unit} with '${_gas_fee}' ` +
-      `'${_measure_unit}' with priority fee ` +
-      `'${_fee_priority}' '${_measure_unit}' from rpc ` +
-      `'${_target_network}' using ` +
-      `selection mode ` +
-      `'${_price_gas_transaction_get_selection_mode}'.`;
-    _msg_info(
-      _msg);
+    _price_gas =
+      _price_gas_auto_detect(
+        _target_network,
+        _api_key_path,
+        _measure_unit,
+        _price_gas);
   }
   else {
     _msg =
@@ -387,7 +412,7 @@ async function
       0;
   }
   _msg_value =
-    Number(
+    BigInt(
       _msg_value);
   if ( typeof(
          _call_timeout) === "undefined" ||
@@ -401,6 +426,18 @@ async function
     _call_timeout =
       Number(
         _call_timeout);
+  }
+  if ( typeof(
+         _measure_unit) === "undefined" ||
+         _measure_unit == "" ) {
+    _measure_unit =
+      "wei";
+  }
+  if ( typeof(
+         _verbose) === "undefined" ||
+         _verbose == "" ) {
+    _verbose =
+      "n";
   }
   _contract_get_opts = [
     _wallet_seed,
@@ -516,7 +553,7 @@ async function
               _price_gas_transaction_get.apply(
                 null,
                 _price_gas_transaction_get_args);
-	  }
+          }
         }
         if ( _price_feasible_retries_max < _price_feasible_retries ) {
           _msg =
@@ -619,15 +656,21 @@ async function
           null,
           _method_args)
     }
-    if ( _tx == undefined ) {
+    if ( typeof(
+           _tx) == "undefined" ) {
       _msg = {
         "code":
-	  444444, 
+          444444, 
         "message":
           "Transaction response undefined." };
       throw _msg;
     }
-    if ( quiet == "n" ) {
+    _msg =
+      `Transaction no. '${_tx.nonce}' ` +
+      `sent to network.`;
+    _msg_info(
+      _msg);
+    if ( _verbose == "y" ) {
       console.log(
         _tx);
     }
@@ -638,7 +681,8 @@ async function
   } catch (
       _error) {
     if ( "code" in _error ) {
-      if ( _error["code"] == -32010 ) {
+      if ( _error[
+             "code"] == -32010 ) {
       _msg_info(
         _error[
           "message"]);
@@ -662,7 +706,8 @@ async function
       _msg);
     throw _error;
   };
-  return _receipt;
+  return [ _tx,
+           _receipt];
 }
 
 async function
@@ -686,7 +731,9 @@ async function
     _verbose) {
   let
     _msg,
+    _receipt,
     _tx,
+    _tx_cost,
     _contract_call_dynamic_opts,
     _wallet_path_list,
     _wallet_path;
@@ -737,7 +784,7 @@ async function
       0;
   }
   _msg_value =
-    Number(
+    BigInt(
       _msg_value);
   if ( typeof(
          _measure_unit) === undefined ||
@@ -798,34 +845,61 @@ async function
     1;
   while ( _attempt <= _retries_max ) {
     try {
-      _tx =
+      [ _tx,
+        _receipt ] =
         await _contract_call_dynamic.apply(
           null,
           _contract_call_dynamic_opts);
-      if ( _tx == undefined ) {
+      if ( typeof(
+             _receipt) == "undefined" ) {
         _msg_error_transaction_undefined(
           _attempt);
         _msg =
-          "Transaction undefined.";
+          "No receipt, transaction may have failed.";
         throw _msg;
       }
-      else if ( _tx != undefined ) {
+      else if ( typeof(
+                  _receipt) != "undefined" ) {
         _msg =
           `Transaction no. '${_tx.nonce}'.`;
         _msg_info(
           _msg);
         if ( _verbose == "y" ) {
+          _msg =
+            "Transaction response:";
+          _msg_info(
+            _msg);
           console.log(
             _tx);
-	}
-        if ( _tx.hash != undefined ) {
           _msg =
-            `Transaction hash: '${_tx.hash}'.`;
+            "Transaction receipt:";
+          _msg_info(
+            _msg);
+          console.log(
+            _receipt);
+	}
+        if ( _receipt.hash != undefined ) {
+          _msg =
+            `Transaction hash: '${_receipt.hash}'.`;
+          _msg_info(
+            _msg);
+          _tx_cost =
+            _receipt[
+              "gasUsed"] *
+            _receipt[
+              "gasPrice"];
+          if ( _measure_unit == "ether" ) {
+            _tx_cost =
+              _wei_to_ether(
+                _tx_cost);
+	  }
+          _msg =
+            `Transaction cost: '${_tx_cost}'.`;
           _msg_info(
             _msg);
           break;
         }
-        else if ( _tx.hash == undefined ) {
+        else if ( _receipt.hash == undefined ) {
         _msg_error_transaction_failed(
           _attempt);
         _msg =
@@ -859,7 +933,8 @@ async function
       "Maximum number of retries reached.";
     throw _msg;
   }
-  return _tx;
+  return [_tx,
+          _receipt ];
 }
 
 function
@@ -1112,8 +1187,31 @@ function
   }
 }
 
+async function
+  _contract_run_cmdline(
+    app_opts) {
+  let
+    _receipt,
+    _tx;
+  [ _tx,
+    _receipt ] =
+    await _contract_run.apply(
+      null,
+      app_opts);
+  _msg =
+    "Transaction response:"
+  console.log(
+    _tx);
+  _msg =
+    "Transaction receipt:"
+  console.log(
+    _receipt);
+}
+
 if ( _cmdline_check(
-       "evm-contract-call-dynamic") ) {
+       "evm-contract-call-dynamic") ||
+     _cmdline_check(
+       "contract-run") ) {
   _global_variables();
   _cmdline_parse();
   _config_show();
@@ -1135,8 +1233,7 @@ if ( _cmdline_check(
     contract_method,
     method_args
   ];
-  _contract_run.apply(
-    null,
+  _contract_run_cmdline(
     app_opts);
 }
 
