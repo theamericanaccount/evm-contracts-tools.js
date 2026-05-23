@@ -682,7 +682,8 @@ async function
     _contract_compiler_output_path,
     _contract_method,
     _method_args,
-    _output_file) {
+    _output_file,
+    _verbose) {
   let
     _msg,
     _tx,
@@ -771,6 +772,12 @@ async function
       _msg_info_wallet_selected(
         _wallet_path);
   }
+  if ( typeof(
+         _verbose) === "undefined" ||
+       _verbose == "" ) {
+    _verbose =
+      "n";
+  }
   _contract_call_dynamic_opts = [
     _call_timeout,
     _wallet_seed,
@@ -798,16 +805,22 @@ async function
       if ( _tx == undefined ) {
         _msg_error_transaction_undefined(
           _attempt);
-        throw "Transaction undefined."
+        _msg =
+          "Transaction undefined.";
+        throw _msg;
       }
       else if ( _tx != undefined ) {
-        if ( quiet == "n" ) {
+        _msg =
+          `Transaction no. '${_tx.nonce}'.`;
+        _msg_info(
+          _msg);
+        if ( _verbose == "y" ) {
           console.log(
             _tx);
 	}
         if ( _tx.hash != undefined ) {
           _msg =
-            "Transaction sent.";
+            `Transaction hash: '${_tx.hash}'.`;
           _msg_info(
             _msg);
           break;
@@ -815,12 +828,16 @@ async function
         else if ( _tx.hash == undefined ) {
         _msg_error_transaction_failed(
           _attempt);
-        throw "Transaction hash undefined."
+        _msg =
+          "Transaction hash undefined.";
+        throw _msg;
         }
         else {
-        _msg_error_transaction_failed(
-          _attempt);
-        throw "Unknown transaction error."
+          _msg_error_transaction_failed(
+            _attempt);
+          _msg =
+            "Unknown transaction error.";
+          throw _msg;
         }
       }
     } catch (
@@ -838,7 +855,9 @@ async function
     }
   }
   if ( _attempt > _retries_max ) {
-    throw "Maximum number of retries reached.";
+    _msg =
+      "Maximum number of retries reached.";
+    throw _msg;
   }
   return _tx;
 }
@@ -891,32 +910,48 @@ function
     "    [method-args]",
     "",
     "Args:",
+    "",
     "  <quiet>                          Can be 'y' or 'n'",
     "                                   Default: y",
+    "",
     "  <retries-max>                    Maximum number of retries before",
     "                                   failing.",
+    "",
     "  <call-timeout>                   How many milliseconds to wait for a return",
     "                                   before declaring the call failed.",
+    "",
     "  <wallet-seed>                    Path of the file containing",
     "                                   the seed phrase.",
+    "",
     "  <wallet-password>                Password of the wallet.",
+    "",
     "  <api-key-path>                   Path of the API key for the",
     "                                   contract ABI provider service.",
+    "",
     "  <target-network>                 Network on which the contract",
     "                                   resides.",
+    "",
     "  <price-gas>                      Gas price for the transaction.",
+    "",
     "  <msg-value>                      How much <measure-unit> attach",
     "                                   to the transaction.",
-    "                                   Default: 0",
+    `                                   Default: ${msg_value}`,
+    "",
     "  <measure-unit>                   Measure unit for the transaction",
     "                                   value. It can be 'wei' or 'ether'",
     `                                   Default: ${measure_unit}`,
+    "",
     "  <contract-address>               Address of the contract.",
+    "",
     "  <contract-abi_path>              Contract ABI path.",
+    "",
     "  <contract-bytecode-path>         Path for the contract bytecode.",
+    "",
     "  <contract-compiler-output-path>  Path for the contract compiler",
     "                                   output path (the hardhat artifact).",
+    "",
     "  <contract-method>                Contract method to execute.",
+    "",
     "  [method-args]                    Arguments to pass to the method.",
     "",
     "  Options:",
