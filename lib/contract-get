@@ -42,15 +42,20 @@ const
     require(
       "crash-js");
 /* global
-     _file_read */
+     _cmdline_check */
 const
   _cmdline_check =
     _libcrash._cmdline_check;
 /* global
-     _file_read */
+     _dirname */
 const
   _dirname =
     _libcrash._dirname;
+/* global
+     _file_exists */
+const
+  _file_exists =
+    _libcrash._file_exists;
 /* global
      _file_read */
 const
@@ -249,7 +254,26 @@ async function
     _contract_address,
     _contract_compiler_output_path) {
   let
-    _contract;
+    _contract,
+    _msg;
+  if ( typeof(
+         _contract_compiler_output_path) == "undefined" ||
+       _contract_compiler_output_path == "" ) {
+    _msg =
+      `No contract compiler output path given in input.`;
+    _msg_error(
+      _msg,
+      1);
+  }
+  if ( ! _file_exists(
+           _contract_compiler_output_path) ) {
+    _msg =
+      `No contract compiler output found ` +
+      `at path '${_contract_compiler_output_path}'.`;
+    _msg_error(
+      _msg,
+      1);
+  }
   const
     _contract_compiler_output =
       _file_read(
