@@ -137,8 +137,48 @@ function
 }
 
 function
-  _default_artifact_path_get() {
-  true;
+  _default_artifact_path_get(
+    _type) {
+  let
+    _artifact,
+    _file_name;
+  const
+    _home =
+      _homedir.get();
+  const
+    _data_dir =
+      _path_join( [
+        _home,
+        ".local",
+        "share",
+        "evm-contract-call" ]);
+  if ( _type == "abi" ) {
+    _file_name =
+      `${contract_address}.abi.json`;
+  }
+  else if ( _type == "bytecode" ) {
+    _file_name =
+      `${contract_address}.bin`;
+  }
+  else if ( _type == "compiler_output" ) {
+    _file_name =
+      `${contract_address}.json`;
+  }
+  else {
+    const
+      _msg =
+        `Unknown artifact type '${_type}'.`;
+    _msg_error(
+      _msg,
+      1);
+  }
+  const
+    _artifact =
+      _path_join( [
+        _data_dir,
+        target_network,
+        _file_name ]);
+  return _artifact;
 }
 
 function
