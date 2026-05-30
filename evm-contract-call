@@ -677,6 +677,8 @@ function
       _argv[
         "network"]);
   }
+  _libevm_cmdline_parse(
+    _argv);
   if ( "v" in _argv ) {
     verbose =
       true;
@@ -788,7 +790,6 @@ if ( _cmdline_check(
      _cmdline_check(
             "evm-contract-call") == true ) {
   _cmdline_parse();
-  _libevm_cmdline_parse();
 }
 else{
   _url_parse();
