@@ -195,6 +195,26 @@ function
 }
 
 function
+  _call_auth_auto_detect() {
+  if ( call_type == "static" ) {
+    call_auth =
+      "n";
+  }
+  else if ( call_type == "dynamic" ) {
+    call_auth =
+      "y";
+  }
+  else {
+    const
+      _msg =
+        `Unknown call type '${call_type}'.`;
+    _msg_error(
+      _msg,
+      1);
+  }
+}
+
+function
   _evm_contract_call(
     _call_type,
     _call_timeout,
@@ -239,6 +259,8 @@ function
 }
 
 module.exports = {
+  _call_auth_auto_detect:
+    _call_auth_auto_detect,
   _contract_abi_auto_detect:
     _contract_abi_auto_detect,
   _default_artifact_path_get:
