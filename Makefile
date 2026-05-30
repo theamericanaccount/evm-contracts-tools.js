@@ -138,7 +138,7 @@ build-npm:
 
 	make \
 	  build-man
-	for _file in $(_NPM_FILES); do \
+	for _file in $(NPM_FILES); do \
 	  if [[ -d "$${_file}" ]]; then \
 	    mkdir \
 	     -p \
