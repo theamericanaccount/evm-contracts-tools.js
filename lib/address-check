@@ -114,20 +114,29 @@ function
     _display_fun,
     _line,
     _text;
-  _text = [
-    "Checks whether an address is valid.",
-    "",
-    "usage:",
-    "  address-check",
-    "    <target-address>",
-    "",
-    "args:",
-    "  <target-address>                 Address to check.",
-    "",
-    "  options:",
-    "    -v --verbose                   Extended output.",
-    "    -h --help                      This help."
-  ];
+  const
+    _argv =
+      _argv_get();
+  const
+    _program =
+      _basename(
+        _argv[
+          "$0"]);
+  const
+    _text = [
+      "Checks whether an address is valid.",
+      "",
+      "usage:",
+      `  ${_program}`,
+      "    <target-address>",
+      "",
+      "args:",
+      "  <target-address>                 Address to check.",
+      "",
+      "  options:",
+      "    -v --verbose                   Extended output.",
+      "    -h --help                      This help."
+    ];
   for (_line of _text) {
     _msg_info(
       _line);

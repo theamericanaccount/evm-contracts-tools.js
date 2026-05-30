@@ -114,34 +114,24 @@ build-man:
 	    update \
 	    --init \
 	      "man" || \
-	true
-	mkdir \
-	  -p \
-	  "build/man"
-	cp \
-	  "man/variables.rst" \
-	  "build/man"
+	true; \
 	_version="$$( \
 	  npm \
 	    view \
 	      "$${PWD}" \
 	      "version")"; \
-	sed \
-	  "s/insert.version.here/$${_version}/" \
-	  -i \
-	  "build/man/variables.rst"; \
-	for _file in $(MAN_FILES); do \
-	  cp \
-	    "man/$${_file}.1.rst" \
-	    "build/man/$${_file}.1.rst"; \
-	  rst2man \
-	    "build/man/$${_file}.1.rst" \
-	    "build/man/$${_file}.1"; \
-	  rm \
-	    "build/man/$${_file}.1.rst"; \
-        done
-	rm \
-	  "build/man/variables.rst"
+	cd \
+	  "man"; \
+	make \
+	  _VERSION="$${_version}" \
+	  build-man
+	mkdir \
+	  -p \
+	  "build/man"
+	cp \
+	  -r \
+	  "man/build/"* \
+	  "build/man"
 
 build-npm:
 

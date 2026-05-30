@@ -10,6 +10,11 @@
       "https://patreon.com/tallero"
   },
   "man": [
+    "./man/ethereum-address-validate.1",
+    "./man/evm-contract-bytecode-get.1",
+    "./man/evm-contract-deployer-get.1",
+    "./man/evm-contract-deployment-address.1",
+    "./man/evm-contract-call.1",
     "./man/evm-contract-call-dynamic.1"
   ],
   "files": [
