@@ -238,17 +238,9 @@ if ( _cmdline_check(
   _overrides_set();
   _config_show();
   app_opts = [
-    wallet_seed,
-    retries_max,
-    api_key_path,
-    chain_id,
-    chain_name,
-    target_network,
-    contract_address,
-    transaction_deployment,
-    contract_bytecode_path
+    target_address,
   ];
-  _bytecode_creation_get_cmdline(
+  _address_check_cmdline(
     app_opts);
 }
 
